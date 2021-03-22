@@ -20,19 +20,36 @@ public class MonstersApp {
         System.out.println("Битва началась");
         System.out.println(heroName + " каковы будут ваши действия?");
 
+        while (true) {
 
-        var input = sc.next();
 
-        if (input.equals("/ударить")) {
-            monsterHp -= heroAttackPower;
-            System.out.println(heroName + " нанес персонажу " +
-                    "" + monsterName + " урон " + heroAttackPower);
-            System.out.println("У персонажа " + monsterName + " осталось " + monsterHp + " ед. здоровья");
+            System.out.println("Ход героя " + heroName);
+            System.out.println(heroName + ", каковы будут ваши действия?");
+
+            var input = sc.next();
+
+            if (input.equals("/ударить")) {
+                monsterHp -= heroAttackPower;
+                System.out.println(heroName + " нанес персонажу " +
+                        "" + monsterName + " урон " + heroAttackPower);
+                System.out.println("У персонажа " + monsterName + " осталось " + monsterHp + " ед. здоровья");
+                if(monsterHp <= 0) {
+                    System.out.println(heroName + " победил персонажа " + monsterName);
+                    break;
+                }
+            }
+
+            System.out.println("Ход монстра: " + monsterName);
+            heroHp -= monsterAttackPower;
+            System.out.println(monsterName + " нанес персонажу " + heroName + " урон = " + monsterAttackPower);
+            System.out.println("У персонажа " + heroName + " осталось " + heroHp + " ед. здоровья");
+            if(heroHp<= 0 ) {
+                System.out.println(monsterName + " победил персонажа " + heroName);
+                break;
+            }
+
+
         }
-
-        System.out.println(monsterName + " нанес персонажу " + heroName + " урон = " + monsterAttackPower);
-        heroHp -= monsterAttackPower;
-        System.out.println("У персонажа " + heroName + " осталось " + heroHp + " ед. здоровья");
 
 
         System.out.println("Игра завершена!");
