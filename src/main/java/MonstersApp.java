@@ -23,7 +23,7 @@ public class MonstersApp {
         while (true) {
 
 
-            System.out.println("Ход героя " + heroName);
+            System.out.println("\nХод героя " + heroName);
             System.out.println(heroName + ", каковы будут ваши действия?");
 
             var input = sc.next();
