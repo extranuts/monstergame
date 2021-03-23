@@ -14,9 +14,9 @@ public class MonstersApp {
 
         System.out.println("Битва началась");
         System.out.println(hero.name + " каковы будут ваши действия?\n");
-        System.out.println("Доступные команды: \n " +
-                "/ударить \n" +
-                "/блок \n" +
+        System.out.println("Доступные команды:\n" +
+                "/ударить\n" +
+                "/блок\n" +
                 " ");
 
 
@@ -35,11 +35,16 @@ public class MonstersApp {
                 hero.blockAction();
             }
 
-            System.out.println("Ход монстра: " + monster.name);
-            monster.attack(hero);
-            if(hero.hp<= 0 ) {
-                System.out.println(monster.name+ " победил персонажа " + hero.name);
-                break;
+            System.out.println("\nХод монстра: " + monster.name);
+            monster.reset();
+            if (Math.random()<0.5) {
+                monster.attack(hero);
+                if(hero.hp <= 0 ) {
+                    System.out.println(monster.name+ " победил персонажа " + hero.name);
+                    break;
+                }
+            } else {
+                monster.blockAction();
             }
         }
 
