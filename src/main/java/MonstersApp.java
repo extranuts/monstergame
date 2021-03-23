@@ -5,52 +5,43 @@ public class MonstersApp {
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String heroName = "Her Major";
-        String monsterName = "Troll";
 
-        int heroHp = 10;
-        int monsterHp = 5;
+        GameCharacter hero = new GameCharacter("Sir bob", 10, 2);
+        GameCharacter monster = new GameCharacter("Troll", 6, 2);
 
-        int heroAttackPower = 2;
-        int monsterAttackPower = 1;
-
-        System.out.println(heroName + " Начинает свое путешествие");
-        System.out.println(heroName + " сразу же попадает в засаду. Из леса на него нападает тролль");
+        System.out.println(hero.name + " Начинает свое путешествие\n");
+        System.out.println(hero.name + " сразу же попадает в засаду. Из леса на него нападает тролль");
 
         System.out.println("Битва началась");
-        System.out.println(heroName + " каковы будут ваши действия?");
+        System.out.println(hero.name + " каковы будут ваши действия?\n");
+        System.out.println("Доступные команды: \n " +
+                "/ударить \n" +
+                "/блок \n" +
+                " ");
+
 
         while (true) {
-
-
-            System.out.println("\nХод героя " + heroName);
-            System.out.println(heroName + ", каковы будут ваши действия?");
-
+            System.out.println("\nХод героя " + hero.name);
+            System.out.println(hero.name + ", каковы будут ваши действия?");
             var input = sc.next();
-
             if (input.equals("/ударить")) {
-                monsterHp -= heroAttackPower;
-                System.out.println(heroName + " нанес персонажу " +
-                        "" + monsterName + " урон " + heroAttackPower);
-                System.out.println("У персонажа " + monsterName + " осталось " + monsterHp + " ед. здоровья");
-                if(monsterHp <= 0) {
-                    System.out.println(heroName + " победил персонажа " + monsterName);
+                hero.attack(monster);
+                if(monster.hp <= 0) {
+                    System.out.println(hero.name + " победил персонажа " + monster.name);
                     break;
                 }
             }
-
-            System.out.println("Ход монстра: " + monsterName);
-            heroHp -= monsterAttackPower;
-            System.out.println(monsterName + " нанес персонажу " + heroName + " урон = " + monsterAttackPower);
-            System.out.println("У персонажа " + heroName + " осталось " + heroHp + " ед. здоровья");
-            if(heroHp<= 0 ) {
-                System.out.println(monsterName + " победил персонажа " + heroName);
-                break;
+            if(input.equals("/блок")){
+                hero.blockAction();
             }
 
-
+            System.out.println("Ход монстра: " + monster.name);
+            monster.attack(hero);
+            if(hero.hp<= 0 ) {
+                System.out.println(monster.name+ " победил персонажа " + hero.name);
+                break;
+            }
         }
-
 
         System.out.println("Игра завершена!");
     }
